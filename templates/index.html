@@ -1,0 +1,26 @@
+{% include 'create.html' %}
+
+<ul id="getform">
+</ul>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        setInterval(function(){
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'getResponse' %}",
+                success: function(response){
+                    //console.log(response)
+                    $("#getform").empty();
+                    for (var name in response.entries){
+                        var item = "<li><h3>" + response.entries[name].name + "</h3></li>"
+                        $("#getform").append(item);
+                    }
+                },
+                error: function(response){
+                    alert("An error occured!")
+                }
+            });
+        },1000);
+    });
+</script>

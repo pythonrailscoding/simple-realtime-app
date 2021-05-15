@@ -1,0 +1,24 @@
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<form method="POST" action="" id="form-post">
+    {% csrf_token %}
+    <input type="text" id="name" placeholder="Message">
+    <input type="submit" value="Send">
+    </form>
+<script>
+    $(document).on('submit', '#form-post', function(e){
+        e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "/create",
+                data: {
+                    name:$('#name').val(),
+                    csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+                },
+                success: function(data){
+                    
+                }
+            });
+            document.getElementById("name").value = '';
+    });
+    
+</script>
